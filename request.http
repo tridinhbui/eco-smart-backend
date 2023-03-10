@@ -6,7 +6,7 @@ POST http://localhost:8080/api/login
 Content-Type: application/json
 
 {
-    "username":"admin",
+    "username":"huong8",
     "password":"12345"
 }
 ###
@@ -15,6 +15,6 @@ POST http://localhost:8080/api/user/add
 Content-Type: application/json
 
 {
-    "username":"huong4",
+    "username":"huong9",
     "password":"12345"
 }
