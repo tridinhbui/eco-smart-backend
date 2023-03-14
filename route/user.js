@@ -27,7 +27,6 @@ router.post("/add-user", auth,  async (req, res) => {
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
   const user = await User.findOne({ username });
-  console.log(user);
   // compare user hash password with input password
   if (user && (await bcrypt.compare(password, user.password))) {
     // create jwt with timetolive
