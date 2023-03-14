@@ -18,9 +18,12 @@
   },
   "homepage": "https://github.com/tridinhbui/eco-smart-backend#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.0",
+    "mongodb": "^5.1.0",
     "mongoose": "^7.0.1"
   }
 }
