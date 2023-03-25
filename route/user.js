@@ -30,8 +30,8 @@ router.post("/login", async (req, res) => {
   // compare user hash password with input password
   if (user && (await bcrypt.compare(password, user.password))) {
     // create jwt with timetolive
-    // const accessToken = jwt.sign({ username }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "5m" });
-    const accessToken = jwt.sign({username}, process.env.ACCESS_TOKEN_SECRET);
+    const accessToken = jwt.sign({ username }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "30m" });
+    //const accessToken = jwt.sign({username}, process.env.ACCESS_TOKEN_SECRET);
     const refreshToken = jwt.sign({ username }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: "1d" });
     // Assigning refresh token in http-only cookie 
     res.cookie('refreshToken', refreshToken, {
@@ -60,8 +60,8 @@ router.post("/refresh",async (req, res) => {
         else {
           const username = decoded.username;
           // Correct token we send a new access token
-          //const accessToken = jwt.sign({username}, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '5m'});
-          const accessToken = jwt.sign({username}, process.env.ACCESS_TOKEN_SECRET);
+          const accessToken = jwt.sign({username}, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '30m'});
+          //const accessToken = jwt.sign({username}, process.env.ACCESS_TOKEN_SECRET);
           res.json({ accessToken, username, statusCode:200 });
         }
       })
