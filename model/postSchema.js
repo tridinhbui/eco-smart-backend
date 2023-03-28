@@ -7,6 +7,7 @@ const postSchema = new Schema({
   view: {type: Number},
   privacy: { type: String },
   imageURL: { type: String },
+  link: { type: String },
   createdAt: {type: Date, default: Date.now},
   modifiedAt: {type: Date, default: Date.now}
 })
