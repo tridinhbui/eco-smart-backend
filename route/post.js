@@ -42,19 +42,20 @@ router.post("/delete-post", auth, async (req, res) => {
   const content = post.content;
   let regex = /\<img.*?src="(.*?)"/g;
   const imageTags = content.match(regex);
-  for (const imageTag of imageTags){
-    regex = /(http|ftp|https):\/\/([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])/g;
-    let imageUrl = imageTag.match(regex);
-    if (imageUrl){
-      const publicId = imageUrl[0].split("/").pop().split(".")[0];
-      await cloudinary.uploader.destroy(publicId);
+  if (imageTags)
+    for (const imageTag of imageTags){
+      regex = /(http|ftp|https):\/\/([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])/g;
+      let imageUrl = imageTag.match(regex);
+      if (imageUrl){
+        const publicId = imageUrl[0].split("/").pop().split(".")[0];
+        await cloudinary.uploader.destroy(publicId);
+      }
     }
-  }
   await Post.deleteOne({_id:id});
   res.json({ message: "Post deleted successfully!", statusCode: 200 });
 });
 
-router.post("/get-post", auth, async (req, res) => {
+router.post("/get-post", async (req, res) => {
   const {type} = req.body;
   const allPosts = await Post.find({type: type})
   res.json({ posts: allPosts, statusCode: 200 });
