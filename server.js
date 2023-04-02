@@ -3,7 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const userRouter = require("./route/user");
-const sessionRouter = require("./route/session");
+const sessionRouter = require("./route/shop/session");
 const bodyParser = require("body-parser");
 const session = require("express-session");
 const crypto = require("crypto");
