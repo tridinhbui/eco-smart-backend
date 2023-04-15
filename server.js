@@ -1,9 +1,12 @@
 require("dotenv").config();
-
+var cors = require("cors");
 const express = require("express");
 const mongoose = require("mongoose");
 const userRouter = require("./route/user");
-const sessionRouter = require("./route/shop/session");
+const productsRouter = require("./shop/route/products");
+const invoicesRouter = require("./shop/route/invoices");
+const peopleRouter = require("./shop/route/people");
+const sessionRouter = require("./shop/session");
 const bodyParser = require("body-parser");
 const session = require("express-session");
 const crypto = require("crypto");
@@ -14,8 +17,10 @@ const clientRedis = new Redis();
 const app = express();
 app.use(express.json());
 app.use(bodyParser.json());
+app.use(cors());
+app.use(express.json({ extended: false }));
 
-//session
+session;
 app.set("trust proxy", 1);
 app.use(
   session({
@@ -28,7 +33,7 @@ app.use(
 );
 
 const databaseUrl =
-  "mongodb+srv://ecosmartvietnam:eco12345678@cluster0.pyvfb93.mongodb.net/eco-smart-vietnam?retryWrites=true&w=majority";
+  "mongodb+srv://ecosmartvietnam:ecosmartvietnam@cluster0.pyvfb93.mongodb.net/ecoshopvietnam-db";
 
 mongoose
   .connect(databaseUrl, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -37,6 +42,9 @@ mongoose
 
 app.use("/api", userRouter);
 app.use("/api", sessionRouter);
+app.use("/api", productsRouter);
+app.use("/api", invoicesRouter);
+app.use("/api", peopleRouter);
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {

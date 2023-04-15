@@ -13,13 +13,8 @@ if (typeof localStorage === "undefined" || localStorage === null) {
 }
 
 router.get("/get-session", (req, res) => {
-  res.send(req.session);
-});
-
-router.get("/set-session", (req, res) => {
   req.session.visitorId = randomVisitorId();
-  res.send("Set OK");
-  // set localStorage with nextjs
+  res.send(req.session);
 });
 
 function randomVisitorId() {

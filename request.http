@@ -6,7 +6,7 @@ POST http://localhost:8080/api/login
 Content-Type: application/json
 
 {
-    "username":"huong55",
+    "username":"huong56",
     "password":"12345"
 }
 ###
@@ -15,6 +15,15 @@ POST http://localhost:8080/api/add-user
 Content-Type: application/json
 
 {
-    "username":"huong55",
+    "username":"hoangph",
     "password":"12345"
 }
+
+###
+
+GET http://localhost:8080/api/products
+Content-Type: application/json
+
+###
+GET http://localhost:8080/api/products/643509304a3dfb8411d70957
+Content-Type: application/json
